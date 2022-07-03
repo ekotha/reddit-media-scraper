@@ -99,9 +99,9 @@ def main():
     # can probably refactor this code  
     source_dir = os.listdir(os.getcwd())
     # source_dir.remove('main.py')
-    remove_these = ['main.py', '.DS_Store', '.git', '.gitignore']
+    remove_these = ['main.py', 'README.md','.DS_Store', '.git', '.gitignore']
     source_dir = [x for x in source_dir if x not in remove_these]
-    print(*source_dir)
+    # print(*source_dir)
     source_dir.sort()
     source_d = os.getcwd()
 
@@ -211,12 +211,27 @@ def main():
                     # print(gif_vid_url['content'])
                 with open(f'image{index_other_item}{subreddit}{id_time}{gfy_ex_tension[1]}', "wb") as handler:
                     handler.write(img_data)
+                
             except TypeError:
-                print("Processed, completing next file...")
+                print("checkpoint 2 test")
+                try:
+                    gfy = requests.get(url_short, headers={"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.4 Safari/605.1.15"})
+                    if(gfy.status_code == 200):    # checking if server responded with OK
+                        soup_pot_gif = BeautifulSoup(gfy.text,'lxml')
+                        gif_vid_url = soup_pot_gif.find('source', type='video/mp4') 
+                        gfycat_url = gif_vid_url['src']
+                        gfy_ex_tension = os.path.splitext(str(gfycat_url))
+                        img_data = requests.get(gfycat_url).content
+                        # print(gif_vid_url['content'])
+                    with open(f'image{index_other_item}{subreddit}{id_time}{gfy_ex_tension[1]}', "wb") as handler:
+                        handler.write(img_data)
+                except TypeError:
+                    print("No video present")
             except:
                 print("welp...")
                 pass
     print("Phase complete!")
+
 
     source_dir = os.listdir(os.getcwd())
     source_dir = [x for x in source_dir if x not in remove_these]
@@ -230,7 +245,6 @@ def main():
         if substring in files:
             shutil.move(source_d + "/" + files, destination_dir)
             destination_dir_a = os.listdir(f'{destination_dir}')
-
             index_of_file = source_dir.index(files)
 
         else:
