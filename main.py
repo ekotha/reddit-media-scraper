@@ -98,9 +98,10 @@ def main():
     # prepping files in directory for moving.
     # can probably refactor this code  
     source_dir = os.listdir(os.getcwd())
-    source_dir.remove('main.py')
-    if '.DS_store' in source_dir:
-        source_dir.remove('.DS_Store')
+    # source_dir.remove('main.py')
+    remove_these = ['main.py', '.DS_Store', '.git', '.gitignore']
+    source_dir = [x for x in source_dir if x not in remove_these]
+    print(*source_dir)
     source_dir.sort()
     source_d = os.getcwd()
 
@@ -218,9 +219,7 @@ def main():
     print("Phase complete!")
 
     source_dir = os.listdir(os.getcwd())
-    source_dir.remove('main.py')
-    if '.DS_store' in source_dir:
-        source_dir.remove('.DS_Store')
+    source_dir = [x for x in source_dir if x not in remove_these]
     source_dir.sort()
     source_d = os.getcwd()
 
