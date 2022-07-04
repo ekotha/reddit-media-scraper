@@ -56,7 +56,7 @@ The project doesn't grab media from posts that contain galleries, I might try to
 ## Getting Started
 
 Please ensure you have all the appropriate libaries installed before running. 
-At present, you can run main.py in the terminal and it will prompt you for a subreddit name. 
+At present, you can run main.py in the terminal and it will prompt you for a subreddit name. Type in the name (for example 'aww') and press enter. The terminal will say "Phase complete!" once all the processes are done. 
 
 <!-- CONTACT -->
 ## Contact
