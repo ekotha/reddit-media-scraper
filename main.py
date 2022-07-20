@@ -134,7 +134,7 @@ def main():
         url_b = res_short.url
         print(url_b)
         
-        # getting post id to get the media, but check if video src exists too
+        # getting post id to get the media, but check if video src exists
         if "v.redd." in url_short:
             time.sleep(2)
             res = requests.get(url_b, headers={"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.4 Safari/605.1.15"})
@@ -199,7 +199,7 @@ def main():
 
         if url_list == False:
             print("All OK! Program completed.")
-        else: # the hail mary pass for any edge case urls missed on first pass
+        else: # re-try edge case urls
             try:
                 gfy = requests.get(url_short, headers={"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.4 Safari/605.1.15"})
                 if(gfy.status_code == 200):    # checking if server responded with OK
@@ -246,7 +246,6 @@ def main():
             shutil.move(source_d + "/" + files, destination_dir)
             destination_dir_a = os.listdir(f'{destination_dir}')
             index_of_file = source_dir.index(files)
-
         else:
             print(files + " was not moved.")
 
